@@ -1,0 +1,55 @@
+VERSÃO VALIDADA PELO USUÁRIO — 2026-10-05
+--------------------------------------
+Usuário confirmou: "perfeito, funcionou tudo", após testes de Freedoom 1 e 2.
+README finalizado com instalação via M5Launcher, WADs oficiais completos,
+nomes longos, saves separados, transição de iluminação e estado da validação.
+Build final: build/Tab5Freedoom.bin, 891584 bytes, 57% livres na partição de 2 MiB.
+Suporte DEHACKED/Boom não ampliado; não se presume conclusão de todos os mapas.
+Na captura disponível, ambos os WADs foram reconhecidos; Phase 1 teve gráficos
+e SFX ativos, 25.9–41.5 FPS após inicialização, sem abort/panic observado.
+Confirmação da Phase 2 vem do usuário; a captura terminou durante Phase 1.
+Checksum SHA256 do ZIP oficial Freedoom 0.13.0 verificado antes da cópia.
+Licença dos dados preservada em downloads/freedoom-0.13.0/COPYING.txt.
+Históricos abaixo descrevem estados anteriores; pendências de abertura foram
+resolvidas pela validação atual. Nenhum novo ajuste de código nesta finalização.
+
+LEITURA DOS IWADS E PRIMEIRA EXECUÇÃO — 2026-10-05
+----------------------------------------------
+Serial após instalação do firmware corrigido encontrou freedoom1.wad e
+freedoom2.wad nos caminhos esperados. Correção de nomes longos confirmada.
+Freedoom: Phase 1 iniciou, gráficos e SFX ativos, render de 32.5 a 41.5 fps
+no trecho observado. Sem abort/panic nesse trecho.
+WAD não coube em bloco contínuo de PSRAM; engine usou streaming do microSD.
+Aviso do engine sobre compatibilidade Freedoom permanece; não representa
+validação de todos os mapas. Phase 2 e ciclo de saída ainda não observados.
+Log: .debug_logs/freedoom-invalid-wad-reboot.log.
+
+NOMES LONGOS NO FAT — 2026-10-05
+------------------------------
+Serial confirmou os dois WADs como ausentes/inválidos após cópia dos oficiais.
+Encontrada configuração herdada CONFIG_FATFS_LFN_NONE=y: nomes limitados a
+8.3, enquanto freedoom1/freedoom2 têm nove caracteres antes da extensão.
+Habilitado CONFIG_FATFS_LFN_HEAP=y e limite 255 em sdkconfig/defaults.
+Isso também permite os diretórios separados de saves freedoom1/freedoom2.
+Adicionados logs distintos para falha no fopen (errno) e cabeçalho inválido.
+Os oito testes de menu passaram; testes no host não exercitam o FAT do ESP.
+Captura: .debug_logs/freedoom-invalid-wad-reboot.log.
+Validação de leitura dos WADs no aparelho pendente de instalação do novo build.
+Build corrigido concluído com ESP-IDF 5.4.4: build/Tab5Freedoom.bin.
+Log: .debug_logs/freedoom-long-filenames-build.log.
+
+TAB5FREEDOOM — 2026-10-05
+-------------------------
+Criado a partir de Tab5FinalDoom, preservando display, controles, áudio,
+menu e apagamento da iluminação durante o reinício.
+Menu: Freedoom 1 / Freedoom 2. IWADs em /sdcard/doom/freedoom1.wad e
+/sdcard/doom/freedoom2.wad; nomes maiúsculos aceitos.
+Saves/config separados em /sdcard/doom/freedoom1/ e /sdcard/doom/freedoom2/.
+Histórico da base preservado em TAB5FINALDOOM_BASE_HISTORY.txt.
+Engine já reconhece os nomes das duas fases; suporte DEHACKED permanece
+desativado como na base. Compatibilidade dos WADs e mapas depende de teste
+no aparelho; esta adaptação não amplia os recursos do engine.
+Build ESP-IDF 5.4.4 concluído: build/Tab5Freedoom.bin, 886656 bytes,
+58% livres na partição de aplicativo. Sem gravação no aparelho.
+Oito cenários de menu e teste de encerramento passaram.
+Log: .debug_logs/freedoom-build.log.
